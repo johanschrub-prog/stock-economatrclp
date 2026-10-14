@@ -300,23 +300,38 @@ if(currentTab === "resume"){
 
     });
 
-    html += `
-    <div class="card">
+   html += `
+<div class="card">
 
-        <h2>TOTAL GÉNÉRAL</h2>
+    <h2>TOTAL GÉNÉRAL</h2>
 
-        <p>
-        ${nbArticlesGlobal}
-        article(s)
-        </p>
+    <p>
+    ${nbArticlesGlobal}
+    article(s)
+    </p>
 
-        <p>
-        ${totalGlobal}
-        unité(s)
-        </p>
+    <p>
+    ${totalGlobal}
+    unité(s)
+    </p>
 
-    </div>
-    `;
+    <br>
+
+    <button
+    class="edit"
+    style="
+    width:100%;
+    font-size:18px;
+    padding:12px;
+    "
+    onclick="validerRemontee()">
+
+    ✅ Valider la remontée
+
+    </button>
+
+</div>
+`;
 
 }
 else{
@@ -669,3 +684,86 @@ function importExcel(event){
 
 }
 render();
+function validerRemontee(){
+
+    const articles = [
+
+        ...data.caveRCLP
+
+    ].filter(a =>
+        Number(a.quantite) > 0
+    );
+
+    if(articles.length === 0){
+
+        alert(
+            "Aucune quantité à valider"
+        );
+
+        return;
+
+    }
+
+    if(
+        !confirm(
+            "Valider la remontée de cave ?"
+        )
+    ){
+        return;
+    }
+
+    const mouvements =
+    JSON.parse(
+        localStorage.getItem(
+            "remonteeRCLP"
+        )
+    ) || [];
+
+    data.caveRCLP
+    .filter(a => Number(a.quantite) > 0)
+    .forEach(article => {
+
+        mouvements.push({
+
+            date:
+            new Date()
+            .toLocaleString(),
+
+            code:
+            article.code,
+
+            article:
+            article.article,
+
+            quantite:
+            article.quantite,
+
+            origine:
+            "caveRCLP"
+
+        });
+
+    });
+
+    localStorage.setItem(
+        "remonteeRCLP",
+        JSON.stringify(mouvements)
+    );
+
+    data.caveRCLP.forEach(article => {
+
+        article.quantite = 0;
+        article.coche = false;
+
+    });
+
+    save();
+
+    render();
+
+    alert(
+        "Remontée enregistrée ✅\n\nLes quantités ont été remises à zéro."
+    );
+
+}
+
