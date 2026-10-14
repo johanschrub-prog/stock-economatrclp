@@ -1,11 +1,10 @@
-let currentTab = "devant";
+let currentTab = "CAVE RCLP";
 
 let data =
 JSON.parse(localStorage.getItem("caveDataRCLP")) || {
 
-    devant: [],
-    champagne: [],
-    alcool: []
+    CAVE RCLP: [],
+  
 
 };
 
@@ -69,18 +68,9 @@ function sauvegarderJSON(){
     }
 
     addSheet(
-        "DEVANT BAR",
-        data.devant
-    );
-
-    addSheet(
-        "ARRIERE BAR CHAMPAGNE",
-        data.champagne
-    );
-
-    addSheet(
-        "ARRIERE BAR ALCOOL",
-        data.alcool
+        "CAVE RCLP",
+        data.CAVE RCLP
+ 
     );
 
     const maintenant = new Date();
@@ -154,9 +144,8 @@ function toggleCheck(id){
     let article = null;
 
     [
-        ...data.devant,
-        ...data.champagne,
-        ...data.alcool
+        ...data.CAVE RCLP
+ 
     ].forEach(a => {
 
         if(String(a.id) === String(id)){
@@ -227,20 +216,11 @@ if(currentTab === "resume"){
     const categories = [
 
         {
-            nom:"DEVANT BAR",
-            data:data.devant
+            nom:"CAVE RCLP",
+            data:data.CAVE RCLP
         },
 
-        {
-            nom:"ARRIERE BAR CHAMPAGNE",
-            data:data.champagne
-        },
-
-        {
-            nom:"ARRIERE BAR ALCOOL",
-            data:data.alcool
-        }
-
+    
     ];
 
     let totalGlobal = 0;
@@ -568,19 +548,10 @@ nom
 }
 
 addSheet(
-"DEVANT BAR",
-data.devant
+"CAVE RCLP",
+data.CAVE RCLP
 );
 
-addSheet(
-"ARRIERE BAR CHAMPAGNE",
-data.champagne
-);
-
-addSheet(
-"ARRIERE BAR ALCOOL",
-data.alcool
-);
 
 const maintenant = new Date();
 
@@ -617,9 +588,8 @@ function importExcel(event){
         );
 
         let imported = {
-            devant: [],
-            champagne: [],
-            alcool: []
+           CAVE RCLP: []
+         
         };
 
         function lireFeuille(
@@ -671,20 +641,10 @@ function importExcel(event){
         }
 
         lireFeuille(
-            "DEVANT BAR",
-            imported.devant
+            "CAVE RCLP",
+            imported.CAVE RCLP
         );
-
-        lireFeuille(
-            "ARRIERE BAR CHAMPAGNE",
-            imported.champagne
-        );
-
-        lireFeuille(
-            "ARRIERE BAR ALCOOL",
-            imported.alcool
-        );
-
+    
         data = imported;
 
         save();
@@ -692,9 +652,8 @@ function importExcel(event){
         render();
 
         alert(
-            "DEVANT BAR : " + imported.devant.length +
-            "\nCHAMPAGNE : " + imported.champagne.length +
-            "\nALCOOL : " + imported.alcool.length
+            "CAVE RCLP : " + imported.CAVE RCLP.length
+     
         );
 
     };
