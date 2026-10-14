@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Remontée de Cave</title>
+
+<link rel="manifest" href="manifest.json">
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+<style>
+#btnAccueil{
+    position:fixed;
+    top:12px;
+    left:12px;
+
+    width:45px;
+    height:45px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#1976d2;
+    color:white;
+
+    font-size:20px;
+    cursor:pointer;
+
+    z-index:9999;
+    box-shadow:0 2px 10px rgba(0,0,0,0.25);
+}
+
+body{
+
+font-family:Segoe UI,sans-serif;
+margin:0;
+background:#f5f6f8;
+}
+
+header{
+background:#0a66ff;
+color:white;
+padding:15px;
+text-align:center;
+}
+
+.tabs,
+.toolbar{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+padding:10px;
+background:white;
+}
+
+.tab{
+padding:10px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+background:#ddd;
+}
+
+.active{
+background:#0a66ff;
+color:white;
+}
+
+.cards{
+padding:10px;
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+gap:10px;
+}
+
+.card{
+background:white;
+padding:15px;
+border-radius:12px;
+box-shadow:0 2px 6px rgba(0,0,0,.15);
+}
+
+.article{
+font-weight:bold;
+font-size:18px;
+margin-bottom:5px;
+}
+
+.qtyInput{
+width:100%;
+padding:10px;
+font-size:22px;
+text-align:center;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+.actions{
+display:flex;
+gap:5px;
+margin-top:10px;
+}
+
+.actions button{
+padding:8px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+color:white;
+}
+
+.edit{
+background:#0d6efd;
+}
+
+.delete{
+background:#dc3545;
+}
+  
+.toolbar{
+position:sticky;
+top:0;
+z-index:1000;
+background:white;
+padding:10px;
+border-bottom:1px solid #ddd;
+}
+.resumeOk{
+    background:#fff3a3;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header id="titreApp">
+<h2>REMONTÉE DE CAVE</h2>
+</header>
+
+<div id="zoneOnglets" class="tabs">
+  
+<button class="tab active"
+onclick="changeTab('devant',this)">
+DEVANT BAR
+</button>
+
+<button class="tab"
+onclick="changeTab('champagne',this)">
+ARRIERE BAR CHAMPAGNE
+</button>
+
+<button class="tab"
+onclick="changeTab('alcool',this)">
+ARRIERE BAR ALCOOL
+</button>
+  
+<button class="tab"
+onclick="changeTab('resume',this)">
+RÉSUMÉ
+</button>
+  
+</div>
+
+<div id="toolbarActions" class="toolbar">
+
+<input
+id="search"
+placeholder="Rechercher..."
+onkeyup="render();window.scrollTo({top:0,behavior:'smooth'});">
+
+<button onclick="addArticle()">
+➕ Ajouter
+</button>
+
+
+<button onclick="resetStock()">
+🔄 Remise à zéro
+</button>
+
+<button onclick="exportExcel()">
+📤 Export Excel
+</button>
+  
+<input
+type="file"
+id="importFile"
+style="display:none"
+onchange="importExcel(event)">
+
+<button
+onclick="document.getElementById('importFile').click()">
+📥 Import Excel
+</button>
+</div>
+
+<div id="cards" class="cards"></div>
+
+<script src="app.js"></script>
+
+<body>
+
+<button id="btnAccueil"
+onclick="location.href='https://johanschrub-prog.github.io/hotel-paix-hub/'">
+🏠
+</button>
+
+<div id="tabs" class="tabs"></div>
+
+</html>
