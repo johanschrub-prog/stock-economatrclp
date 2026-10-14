@@ -1,9 +1,0 @@
-{
-  "name": "Gestion Stock Economat RCLP",
-  "short_name": "Stock",
-  "start_url": "./",
-  "display": "standalone",
-  "background_color": "#f3f5f7",
-  "theme_color": "#0a66ff",
-  "icons": []
-}
