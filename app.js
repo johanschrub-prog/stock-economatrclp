@@ -1,7 +1,7 @@
 let currentTab = "devant";
 
 let data =
-JSON.parse(localStorage.getItem("caveData")) || {
+JSON.parse(localStorage.getItem("caveDataRCLP")) || {
 
     devant: [],
     champagne: [],
@@ -27,7 +27,7 @@ save();
 function save(){
 
 localStorage.setItem(
-"caveData",
+"caveDataRCLP",
 JSON.stringify(data)
 );
 
