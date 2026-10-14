@@ -1,9 +1,9 @@
-let currentTab = "CAVE RCLP";
+let currentTab = "caveRCLP";
 
 let data =
 JSON.parse(localStorage.getItem("caveDataRCLP")) || {
 
-    CAVE RCLP: [],
+    caveRCLP: [],
   
 
 };
@@ -68,8 +68,8 @@ function sauvegarderJSON(){
     }
 
     addSheet(
-        "CAVE RCLP",
-        data.CAVE RCLP
+        "caveRCLP",
+        data.caveRCLP
  
     );
 
@@ -144,7 +144,7 @@ function toggleCheck(id){
     let article = null;
 
     [
-        ...data.CAVE RCLP
+        ...data.caveRCLP
  
     ].forEach(a => {
 
@@ -216,8 +216,8 @@ if(currentTab === "resume"){
     const categories = [
 
         {
-            nom:"CAVE RCLP",
-            data:data.CAVE RCLP
+            nom:"caveRCLP",
+            data:data.caveRCLP
         },
 
     
@@ -548,8 +548,8 @@ nom
 }
 
 addSheet(
-"CAVE RCLP",
-data.CAVE RCLP
+"caveRCLP",
+data.caveRCLP
 );
 
 
@@ -588,7 +588,7 @@ function importExcel(event){
         );
 
         let imported = {
-           CAVE RCLP: []
+           caveRCLP: []
          
         };
 
@@ -641,8 +641,8 @@ function importExcel(event){
         }
 
         lireFeuille(
-            "CAVE RCLP",
-            imported.CAVE RCLP
+            "caveRCLP",
+            imported.caveRCLP
         );
     
         data = imported;
@@ -652,7 +652,7 @@ function importExcel(event){
         render();
 
         alert(
-            "CAVE RCLP : " + imported.CAVE RCLP.length
+            "caveRCLP : " + imported.caveRCLP.length
      
         );
 
