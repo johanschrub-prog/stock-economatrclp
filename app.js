@@ -291,6 +291,13 @@ if(currentTab === "resume"){
 
       <strong>
 ${item.quantite}
+<div
+style="
+text-align:right;
+">
+
+<strong>
+${item.quantite}
 </strong>
 
 ${
@@ -300,6 +307,8 @@ item.redescente
 :
 ""
 }
+
+</div>
 
     </div>
     `;
