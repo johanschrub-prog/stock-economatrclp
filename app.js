@@ -289,9 +289,17 @@ if(currentTab === "resume"){
 
         </div>
 
-        <strong>
-        ${item.quantite}
-        </strong>
+      <strong>
+${item.quantite}
+</strong>
+
+${
+item.redescente
+?
+"<br><span style='color:#dc3545'>🔽 Redescente</span>"
+:
+""
+}
 
     </div>
     `;
@@ -381,7 +389,18 @@ onkeydown="if(event.key==='Enter'){validerQuantite('${item.id}');}">
               onclick="validerQuantite('${item.id}')">
                 OK
                 </button>
+<br><br>
 
+<label>
+
+<input
+type="checkbox"
+${item.redescente ? "checked" : ""}
+onchange="toggleRedescente('${item.id}')">
+
+🔽 Redescente
+
+</label>
             </div>
 
             <div class="actions">
@@ -410,6 +429,23 @@ onkeydown="if(event.key==='Enter'){validerQuantite('${item.id}');}">
 
 document.getElementById("cards")
 .innerHTML = html;
+
+}
+function toggleRedescente(id){
+
+    const article =
+    data[currentTab].find(
+        a => String(a.id) === String(id)
+    );
+
+    if(!article) return;
+
+    article.redescente =
+    !article.redescente;
+
+    save();
+
+    render();
 
 }
 function validerQuantite(id){
@@ -470,11 +506,17 @@ if(!article) return;
 
 data[currentTab].push({
 
-id: crypto.randomUUID(),
+    id: crypto.randomUUID(),
 
-code:code,
-article:article,
-quantite:0
+    code: code,
+
+    article: article,
+
+    quantite: 0,
+
+    coche: false,
+
+    redescente: false
 
 });
 
@@ -654,7 +696,9 @@ function importExcel(event){
                         0
                     ),
 
-                    coche:false
+                   coche:false,
+
+redescente:false
 
                 });
 
@@ -723,25 +767,31 @@ function validerRemontee(){
     .filter(a => Number(a.quantite) > 0)
     .forEach(article => {
 
-        mouvements.push({
+  mouvements.push({
 
-            date:
-            new Date()
-            .toLocaleString(),
+    date:
+    new Date().toISOString(),
 
-            code:
-            article.code,
+    code:
+    article.code,
 
-            article:
-            article.article,
+    article:
+    article.article,
 
-            quantite:
-            article.quantite,
+    quantite:
+    article.quantite,
 
-            origine:
-            "caveRCLP"
+    origine:
+    "caveRCLP",
 
-        });
+    type:
+    article.redescente
+    ?
+    "REDESCENTE"
+    :
+    "REMONTEE"
+
+});
 
     });
 
@@ -754,7 +804,7 @@ function validerRemontee(){
 
         article.quantite = 0;
         article.coche = false;
-
+article.redescente = false;
     });
 
     save();
