@@ -218,9 +218,8 @@ if(currentTab === "resume"){
         {
             nom:"caveRCLP",
             data:data.caveRCLP
-        },
+        }
 
-    
     ];
 
     let totalGlobal = 0;
@@ -230,65 +229,145 @@ if(currentTab === "resume"){
 
         const articles =
         cat.data.filter(
-            item =>
-            Number(item.quantite) > 0
+            item => Number(item.quantite) > 0
         );
 
-        if(articles.length === 0)
+        if(articles.length === 0){
             return;
+        }
 
         const totalCategorie =
         articles.reduce(
-            (s,a)=>s+Number(a.quantite),
+            (s,a) => s + Number(a.quantite),
             0
         );
 
         totalGlobal += totalCategorie;
         nbArticlesGlobal += articles.length;
 
-html += `
-<div class="card">
+        html += `
 
-    <h2>TOTAL GÉNÉRAL</h2>
+        <div class="card">
 
-    <p>
-    ${nbArticlesGlobal}
-    article(s)
-    </p>
+            <h2>${cat.nom}</h2>
 
-    <p>
-    ${totalGlobal}
-    unité(s)
-    </p>
+            <p>
+            ${articles.length} article(s)
+            /
+            ${totalCategorie} unité(s)
+            </p>
 
-    <br>
+        `;
 
-    Date de la remontée
+        articles.forEach(item => {
 
-    <br><br>
+            html += `
 
-    <input
-    type="date"
-    id="dateRemontee"
-    value="${new Date().toISOString().split('T')[0]}">
+            <div class="${
+                item.coche ? 'resumeOk' : ''
+            }"
 
-    <br><br>
+            style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:8px;
+            border-bottom:1px solid #eee;
+            ">
 
-    <button
-    class="edit"
-    style="
-    width:100%;
-    font-size:18px;
-    padding:12px;
-    "
-    onclick="validerRemontee()">
+                <div>
 
-    ✅ Valider la remontée
+                    <label>
 
-    </button>
+                        <input
+                        type="checkbox"
+                        ${item.coche ? "checked" : ""}
+                        onchange="toggleCheck('${item.id}')">
 
-</div>
-`;
+                        <strong>
+                        ${item.code || "SANS CODE"}
+                        </strong>
+
+                        - ${item.article}
+
+                    </label>
+
+                </div>
+
+                <div
+                style="
+                text-align:right;
+                ">
+
+                    <strong>
+                    ${item.quantite}
+                    </strong>
+
+                    ${
+                    item.redescente
+                    ?
+                    "<br><span style='color:#dc3545'>🔽 Redescente</span>"
+                    :
+                    ""
+                    }
+
+                </div>
+
+            </div>
+
+            `;
+
+        });
+
+        html += `</div>`;
+
+    });
+
+    html += `
+
+    <div class="card">
+
+        <h2>TOTAL GÉNÉRAL</h2>
+
+        <p>
+        ${nbArticlesGlobal}
+        article(s)
+        </p>
+
+        <p>
+        ${totalGlobal}
+        unité(s)
+        </p>
+
+        <br>
+
+        Date de la remontée
+
+        <br><br>
+
+        <input
+        type="date"
+        id="dateRemontee"
+        value="${new Date().toISOString().split('T')[0]}">
+
+        <br><br>
+
+        <button
+        class="edit"
+        style="
+        width:100%;
+        font-size:18px;
+        padding:12px;
+        "
+        onclick="validerRemontee()">
+
+        ✅ Valider la remontée
+
+        </button>
+
+    </div>
+
+    `;
 
 }
 else{
