@@ -187,9 +187,16 @@ if(
     ||
     searchCode.trim() !== ""
 ){
+
     titre.style.display = "none";
 
     zoneOnglets.style.display = "none";
+
+    document.getElementById("search")
+    .style.display =
+    searchCode.trim() !== ""
+    ? "none"
+    : "";
 
     toolbar.querySelectorAll("button")
     .forEach(btn => {
@@ -199,6 +206,23 @@ if(
         ){
             btn.style.display = "none";
         }
+
+    });
+
+}
+else{
+
+    titre.style.display = "";
+
+    zoneOnglets.style.display = "flex";
+
+    document.getElementById("search")
+    .style.display = "";
+
+    toolbar.querySelectorAll("button")
+    .forEach(btn => {
+
+        btn.style.display = "";
 
     });
 
