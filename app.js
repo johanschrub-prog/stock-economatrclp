@@ -182,7 +182,11 @@ document.getElementById("toolbarActions");
     const titre =
 document.getElementById("titreApp");
 
-if(search.trim() !== ""){
+if(
+    search.trim() !== ""
+    ||
+    searchCode.trim() !== ""
+){
     titre.style.display = "none";
 
     zoneOnglets.style.display = "none";
