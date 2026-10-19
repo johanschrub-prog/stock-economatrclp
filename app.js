@@ -170,6 +170,10 @@ const search =
 document.getElementById("search")
 .value
 .toLowerCase();
+
+const searchCode =
+document.getElementById("searchCode")
+?.value || "";
 const zoneOnglets =
 document.getElementById("zoneOnglets");
 
@@ -374,20 +378,30 @@ else{
 
     data[currentTab]
 
- .filter(item =>
+.filter(item => {
 
-    (item.article || "")
-    .toLowerCase()
-    .includes(search)
+    const matchNom =
 
-    ||
+        search === ""
 
-    (item.code || "")
-    .toString()
-    .toLowerCase()
-    .includes(search)
+        ||
 
-)
+        (item.article || "")
+        .toLowerCase()
+        .includes(search);
+
+    const matchCode =
+
+        searchCode === ""
+
+        ||
+
+        String(item.code || "")
+        .startsWith(searchCode);
+
+    return matchNom && matchCode;
+
+})
     .forEach((item,index)=>{
 
         html += `
