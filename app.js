@@ -711,24 +711,25 @@ function validerRemontee(){
             "remonteeRCLP"
         )
     ) || [];
-    const dateChoisie =
+ const dateChoisie =
 document.getElementById(
     "dateRemontee"
 )?.value;
 
 const dateMouvement =
 dateChoisie
-? new Date(dateChoisie).toISOString()
-: new Date().toISOString();
+? dateChoisie + " 00:00:00"
+: new Date().toLocaleString();
+
 
     data.caveRCLP
     .filter(a => Number(a.quantite) > 0)
     .forEach(article => {
 
-  mouvements.push({
+ mouvements.push({
 
-date: dateMouvement,
-
+    date:
+    dateMouvement,
 
     code:
     article.code,
