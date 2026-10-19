@@ -227,20 +227,6 @@ else{
     });
 
 }
-else{
-
-    titre.style.display = "";
-    
-    zoneOnglets.style.display = "flex";
-
-    toolbar.querySelectorAll("button")
-    .forEach(btn => {
-
-        btn.style.display = "";
-
-    });
-
-}
 let html = "";
 
 if(currentTab === "resume"){
