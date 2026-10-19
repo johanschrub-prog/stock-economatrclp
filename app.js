@@ -246,78 +246,7 @@ if(currentTab === "resume"){
         totalGlobal += totalCategorie;
         nbArticlesGlobal += articles.length;
 
-        html += `
-        <div class="card">
-
-        <h2>${cat.nom}</h2>
-
-        <p>
-        ${articles.length} article(s)
-        /
-        ${totalCategorie} unité(s)
-        </p>
-        `;
-
-     articles.forEach(item => {
-
-    html += `
-    <div class="${
-        item.coche ? 'resumeOk' : ''
-    }"
-
-    style="
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:8px;
-    border-bottom:1px solid #eee;
-    ">
-
-        <div>
-
-            <label>
-
-            <input
-            type="checkbox"
-            ${item.coche ? "checked" : ""}
-         onchange="toggleCheck('${item.id}')">
-
-            <strong>${item.code || "SANS CODE"}</strong>
-            - ${item.article}
-
-            </label>
-
-        </div>
-
-      <strong>
-${item.quantite}
-<div
-style="
-text-align:right;
-">
-
-<strong>
-${item.quantite}
-</strong>
-
-${
-item.redescente
-?
-"<br><span style='color:#dc3545'>🔽 Redescente</span>"
-:
-""
-}
-
-</div>
-
-    </div>
-    `;
-});
-        html += `</div>`;
-
-    });
-
-   html += `
+html += `
 <div class="card">
 
     <h2>TOTAL GÉNÉRAL</h2>
@@ -333,6 +262,17 @@ item.redescente
     </p>
 
     <br>
+
+    Date de la remontée
+
+    <br><br>
+
+    <input
+    type="date"
+    id="dateRemontee"
+    value="${new Date().toISOString().split('T')[0]}">
+
+    <br><br>
 
     <button
     class="edit"
@@ -771,6 +711,15 @@ function validerRemontee(){
             "remonteeRCLP"
         )
     ) || [];
+    const dateChoisie =
+document.getElementById(
+    "dateRemontee"
+)?.value;
+
+const dateMouvement =
+dateChoisie
+? new Date(dateChoisie).toISOString()
+: new Date().toISOString();
 
     data.caveRCLP
     .filter(a => Number(a.quantite) > 0)
@@ -778,8 +727,8 @@ function validerRemontee(){
 
   mouvements.push({
 
-    date:
-    new Date().toISOString(),
+date: dateMouvement,
+
 
     code:
     article.code,
