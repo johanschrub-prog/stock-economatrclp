@@ -173,8 +173,16 @@ onkeyup="render();window.scrollTo({top:0,behavior:'smooth'});">
 id="searchCode"
 type="number"
 inputmode="numeric"
-placeholder="Recherche code"
-oninput="render()">
+placeholder="🔢 Recherche code"
+oninput="render()"
+style="
+width:100%;
+padding:15px;
+font-size:22px;
+font-weight:bold;
+box-sizing:border-box;
+">
+
 
 <button onclick="addArticle()">
 ➕ Ajouter
