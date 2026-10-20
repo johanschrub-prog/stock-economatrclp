@@ -529,11 +529,15 @@ function validerQuantite(id){
 
     setTimeout(() => {
 
-        const recherche =
-        document.getElementById("search");
+        const rechercheCode =
+        document.getElementById("searchCode");
 
-        recherche.value = "";
-        recherche.focus();
+        if(rechercheCode){
+
+            rechercheCode.focus();
+            rechercheCode.select();
+
+        }
 
     }, 50);
 
